@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">あめ</string>
+    <string name="action_settings">Settings</string>
+    <string name="hiragana">ひらがな</string>
+    <string name="katakana">カタカナ</string>
+    <string name="mix">ミキシング</string>
+    <string name="status">ステータス</string>
+    <string name="hiragana_a">あ</string>
+    <string name="hiragana_i">い</string>
+    <string name="hiragana_u">う</string>
+    <string name="hiragana_e">え</string>
+    <string name="hiragana_o">お</string>
+    <string name="hiragana_ka">か</string>
+    <string name="hiragana_ki">き</string>
+    <string name="hiragana_ku">く</string>
+    <string name="hiragana_ke">け</string>
+    <string name="hiragana_ko">こ</string>
+    <string name="hiragana_sa">さ</string>
+    <string name="hiragana_shi">し</string>
+    <string name="hiragana_su">す</string>
+    <string name="hiragana_se">せ</string>
+    <string name="hiragana_so">そ</string>
+    <string name="hiragana_ta">た</string>
+    <string name="hiragana_chi">ち</string>
+    <string name="hiragana_tsu">つ</string>
+    <string name="hiragana_te">て</string>
+    <string name="hiragana_to">と</string>
+    <string name="hiragana_na">な</string>
+    <string name="hiragana_ni">に</string>
+    <string name="hiragana_nu">ぬ</string>
+    <string name="hiragana_ne">ね</string>
+    <string name="hiragana_no">の</string>
+    <string name="hiragana_ha">は</string>
+    <string name="hiragana_hi">ひ</string>
+    <string name="hiragana_hu">ふ</string>
+    <string name="hiragana_he">へ</string>
+    <string name="hiragana_ho">ほ</string>
+    <string name="hiragana_ma">ま</string>
+    <string name="hiragana_mi">み</string>
+    <string name="hiragana_mu">む</string>
+    <string name="hiragana_me">め</string>
+    <string name="hiragana_mo">も</string>
+    <string name="hiragana_ya">や</string>
+    <string name="hiragana_yu">ゆ</string>
+    <string name="hiragana_yo">よ</string>
+    <string name="hiragana_ra">ら</string>
+    <string name="hiragana_ri">り</string>
+    <string name="hiragana_ru">る</string>
+    <string name="hiragana_re">れ</string>
+    <string name="hiragana_ro">ろ</string>
+    <string name="hiragana_wa">わ</string>
+    <string name="hiragana_wi">ゐ</string>
+    <string name="hiragana_we">ゑ</string>
+    <string name="hiragana_wo">を</string>
+
+
+</resources>

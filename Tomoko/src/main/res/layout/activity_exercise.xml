@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                tools:context=".HomeActivity"
+                android:background="@drawable/gradient_grey">
+
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        xmlns:android="http://schemas.android.com/apk/res/android">
+
+                    <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="256dp"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="あ"
+                            android:gravity="center"
+                            android:id="@+id/textDisplay"
+                            android:textAlignment="center"
+                            android:textSize="200dp"
+                            android:textColor="@android:color/secondary_text_light"/>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+                        android:layout_marginTop="50dp">
+
+
+                        <Button
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:text="〇"
+                            android:id="@+id/btnLeft"
+                            android:textSize="60dp"
+                            android:background="#538726"
+                            android:textColor="@color/greyLgt" />
+
+                        <Button
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:text="\?"
+                            android:id="@+id/btnMiddle"
+                            android:textSize="60dp"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/greyLgt"
+                            android:background="#3d3d3d" />
+
+                        <Button
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:id="@+id/btnRight"
+                            android:textSize="70dp"
+                            android:layout_gravity="center_vertical"
+                            android:text="✕"
+                            android:textColor="@color/greyLgt"
+                            android:background="#ff3d40" />
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+</RelativeLayout>
