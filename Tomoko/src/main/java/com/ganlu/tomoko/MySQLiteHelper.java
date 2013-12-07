@@ -12,17 +12,22 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public static final String COLUMN_ID = "_id";
 
     public static final String COLUMN_CHARACTER = "character";
-    public static final String COLUMN_STATUS = "status";
+    public static final String COLUMN_ROME = "rome";
+    public static final String COLUMN_RIGHT = "right";
+    public static final String COLUMN_WRONG = "wrong";
+
 
     private static final String DATABASE_NAME = "status.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 9;
 
     // Database creation sql statement
     private static final String DATABASE_CREATE = "create table "
-            + TABLE_STATUS + "(" + COLUMN_ID
-            + " integer primary key autoincrement, " + COLUMN_CHARACTER
-            + " text not null, " + COLUMN_STATUS
-            + " real ont null );";
+            + TABLE_STATUS + "("
+            + COLUMN_ID + " integer primary key autoincrement, "
+            + COLUMN_CHARACTER + " text not null, "
+            + COLUMN_ROME + " text not null, "
+            + COLUMN_RIGHT + " int not null , "
+            + COLUMN_WRONG + " int not null);";
 
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
