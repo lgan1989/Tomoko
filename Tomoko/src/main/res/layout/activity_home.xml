@@ -26,48 +26,51 @@
                 android:layout_marginTop="20dp"/>
 
         <Button
-                android:layout_width="fill_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="ひらがな"
+                android:text="平假名"
                 android:id="@+id/button_hiragana"
                 android:background="#45484a"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center"
                 android:clickable="true"
                 android:enabled="true"
                 android:textColor="#fffcf6"
                 android:layout_marginTop="40dp"/>
 
         <Button
-                android:layout_width="fill_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="カタカナ"
+                android:text="片假名"
                 android:id="@+id/button_katakana "
                 android:background="#45484a"
                 android:clickable="true"
                 android:enabled="true"
                 android:textColor="#fffcf6"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+            android:layout_gravity="center" />
 
         <Button
-                android:layout_width="fill_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="ミキシング"
+                android:text="综合测试"
                 android:id="@+id/button_mix"
                 android:background="#45484a"
                 android:clickable="true"
                 android:enabled="true"
                 android:textColor="#fffcf6"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+            android:layout_gravity="center" />
 
         <Button
-                android:layout_width="fill_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="ステータス"
+                android:text="测试记录"
                 android:id="@+id/button_status"
                 android:background="#45484a"
                 android:clickable="true"
                 android:enabled="true"
                 android:textColor="#fffcf6"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+            android:layout_gravity="center" />
     </LinearLayout>
 </RelativeLayout>

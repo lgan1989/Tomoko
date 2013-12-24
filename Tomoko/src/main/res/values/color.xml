@@ -2,4 +2,6 @@
 <resources>
     <color name="greyMed">#C9C9C9</color>
     <color name="greyLgt">#ECECEC</color>
+    <color name="ameGreen">#16a085</color>
+    <color name="ameRed">#e74c3c</color>
 </resources>

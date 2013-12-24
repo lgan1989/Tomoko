@@ -28,7 +28,11 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="1/25"
                         android:id="@+id/textProgress"
-                        android:layout_gravity="center_horizontal" />
+                        android:layout_gravity="center_horizontal"
+                        style="@style/AppTheme"
+                        android:fontFamily="@string/abc_action_bar_home_description"
+                        android:textColor="@color/abc_search_url_text_pressed"
+                        android:textSize="24dip" />
 
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -43,7 +47,7 @@
                             android:text="〇"
                             android:id="@+id/btnLeft"
                             android:textSize="60dp"
-                            android:background="#538726"
+                            android:background="@color/ameGreen"
                             android:textColor="@color/greyLgt" />
 
                         <Button
@@ -64,7 +68,7 @@
                             android:layout_gravity="center_vertical"
                             android:text="✕"
                             android:textColor="@color/greyLgt"
-                            android:background="#ff3d40" />
+                            android:background="@color/ameRed" />
                     </LinearLayout>
 
 

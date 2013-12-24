@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ganlu.tomoko"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="1.1" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -10,24 +10,32 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:hardwareAccelerated="false"
+        android:debuggable="false"
         android:theme="@android:style/Theme.Holo.Light" >
         <activity
             android:name="com.ganlu.tomoko.HomeActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ganlu.tomoko.ExerciseActivity" >
-        </activity>
+        <activity
+            android:name="com.ganlu.tomoko.ExerciseActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.ganlu.tomoko.ResultActivity"
-            android:label="@string/title_activity_result" >
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.ganlu.tomoko.StatusActivity"
+            android:screenOrientation="portrait"
+            >
         </activity>
     </application>
 

@@ -34,75 +34,42 @@ public class ExerciseActivity extends Activity {
 
 
     private StatusDataSource dtStatus;
-    private ArrayList<String> hiraganaCharters;
     private ArrayList<Status> statusList;
     private ArrayList < Integer > test;
     private int idx;
+    private int wrongCount;
+    private int rightCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
-    }
-
-    private void firstTimeRun()
-    {
-        XmlResourceParser xrp;
-        Resources r = getResources();
-        xrp = r.getXml(R.xml.characters);
-        String text = "";
-        String rome = "";
-        try {
-            while (xrp.getEventType() != XmlResourceParser.END_DOCUMENT) {
-                if (xrp.getEventType() == XmlResourceParser.START_TAG) {
-                    if (xrp.getName().equals("string")){
-                        rome = xrp.getAttributeValue(0);
-                        rome = rome.substring(rome.indexOf('_') + 1);
-                    }
-                } else if (xrp.getEventType() == XmlPullParser.END_TAG) {
-                } else if (xrp.getEventType() == XmlPullParser.TEXT) {
-                    text = xrp.getText();
-                    dtStatus.newRecord(text , rome);
-                }
-                xrp.next();
-            }
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        getSharedPreferences("PREFERENCE", MODE_PRIVATE)
-                .edit()
-                .putBoolean("firstrun", false)
-                .commit();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
 
         Bundle extras = getIntent().getExtras();
         String msg = extras.getString("type");
-        idx = 1;
+        idx = 0;
+        wrongCount = 0;
+        rightCount = 0;
 
-        if (msg == getResources().getString(R.string.hiragana)){
-
-            hiraganaCharters = new ArrayList<String>();
-
-        }
         dtStatus = new StatusDataSource(this);
         dtStatus.open();
-        boolean firstrun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("firstrun", true);
-        if (firstrun){
-            firstTimeRun();
+
+
+        int type = -1;
+        int testSize = 30;
+        if (msg.equals(getResources().getString(R.string.hiragana))){
+            testSize = 20;
+            type = 0;
+        }
+        else if (msg.equals(getResources().getString(R.string.katakana))){
+            testSize = 20;
+            type = 1;
         }
 
+        statusList = dtStatus.getAllStatusByType(type);
+        test = generateTest(testSize);
 
-        statusList = dtStatus.getAllStatus();
-        test = generateTest();
-
-    //    final TextView text = (TextView)findViewById(R.id.textDisplay);
+        //    final TextView text = (TextView)findViewById(R.id.textDisplay);
         final TextSwitcher text =  (TextSwitcher)findViewById(R.id.textSwitcher);
         text.setFactory(new ViewSwitcher.ViewFactory() {
 
@@ -116,46 +83,48 @@ public class ExerciseActivity extends Activity {
                 return myText;
             }
         });
-        Status status = statusList.get(test.get(1));
+        Status status = dtStatus.getStatusById(test.get(0));
         text.setText(status.getCharacter());
-
-        getMenuInflater().inflate(R.menu.exercise, menu);
 
         final Button btnLeft = (Button) findViewById(R.id.btnLeft);
         final Button btnMiddle = (Button) findViewById(R.id.btnMiddle);
         final Button btnRight = (Button) findViewById(R.id.btnRight);
         final TextView textProgress = (TextView)findViewById(R.id.textProgress);
-        textProgress.setText(String.valueOf(idx) + "/" + String.valueOf(test.size()));
+        textProgress.setText(String.valueOf(idx+1) + "/" + String.valueOf(test.size()));
 
         btnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (idx == test.size())
+                    return;
                 idx ++;
+                rightCount ++;
+                Status status =  dtStatus.getStatusById(test.get(idx - 1));
+                String rome = status.getRome();
+                dtStatus.update(status.getRightCount() + 1 , status.getWrongCount() , status.getId());
+                btnMiddle.setText(rome);
+                btnLeft.setEnabled(false);
+                Handler mHandler = new Handler();
+                Runnable r=new Runnable() {
 
-                if (idx == test.size()){
-                    Intent intent=new Intent(getApplicationContext(),ResultActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                }
-                else{
-                    String rome = statusList.get(test.get(idx-1)).getRome();
-                    btnMiddle.setText(rome);
-                    Handler mHandler = new Handler();
-                    Runnable r=new Runnable() {
+                    @Override
+                    public void run() {
+                        if (idx < test.size()){
 
-                        @Override
-                        public void run() {
-                            Status status = statusList.get(test.get(idx));
-                            text.setText(status.getCharacter());
-                            statusList.get(test.get(idx)).addRight();
+                            text.setText(dtStatus.getStatusById(test.get(idx)).getCharacter());
+
                             btnMiddle.setText("?");
-                            textProgress.setText(String.valueOf(idx) + "/" + String.valueOf(test.size()));
+                            textProgress.setText(String.valueOf(idx+1) + "/" + String.valueOf(test.size()));
+                            btnLeft.setEnabled(true);
                         }
-                    };
+                        else{
+                            postTest();
+                        }
+                    }
+                };
 
-                    mHandler.postDelayed(r, 1000);
-                }
+                mHandler.postDelayed(r, 1000);
+
             }
         });
 
@@ -163,46 +132,43 @@ public class ExerciseActivity extends Activity {
             @Override
             public void onClick(View view) {
 
+                if (idx == test.size())
+                    return;
                 idx ++;
+                wrongCount ++;
+                Status status =  dtStatus.getStatusById(test.get(idx - 1));
+                String rome = status.getRome();
+                dtStatus.update(status.getRightCount()  , status.getWrongCount() + 1, status.getId());
+                btnMiddle.setText(rome);
+                btnRight.setEnabled(false);
+                Handler mHandler = new Handler();
+                Runnable r=new Runnable() {
 
-                if (idx == test.size()){
-                    Intent intent=new Intent(getApplicationContext(),ResultActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                }
-                else{
+                    @Override
+                    public void run() {
+                        if (idx < test.size()){
+                            text.setText(dtStatus.getStatusById(test.get(idx)).getCharacter());
 
-                    String rome = statusList.get(test.get(idx-1)).getRome();
-                    btnMiddle.setText(rome);
-                    Handler mHandler = new Handler();
-                    Runnable r=new Runnable() {
-
-                        @Override
-                        public void run() {
-                            Status status = statusList.get(test.get(idx));
-                            text.setText(status.getCharacter());
-                            statusList.get(test.get(idx)).addWrong();
                             btnMiddle.setText("?");
-                            textProgress.setText(String.valueOf(idx) + "/" + String.valueOf(test.size()));
+                            textProgress.setText(String.valueOf(idx+1) + "/" + String.valueOf(test.size()));
+                            btnRight.setEnabled(true);
                         }
-                    };
+                        else{
+                            postTest();
+                        }
+                    }
+                };
 
-                    mHandler.postDelayed(r, 1000);
-                }
+                mHandler.postDelayed(r, 1000);
+
             }
         });
 
-        return true;
+        return;
+
     }
 
-    public class StatusComparator implements Comparator<Status> {
-        @Override
-        public int compare(Status o1, Status o2) {
-            return o1.getRatio() < o2.getRatio() ? 1 : 0;
-        }
-    }
-
-    public ArrayList < Integer > generateTest(){
+    public ArrayList < Integer > generateTest(int size){
 
         int len = statusList.size();
         ArrayList < Integer > result = new ArrayList<Integer>();
@@ -219,21 +185,32 @@ public class ExerciseActivity extends Activity {
             if (ra > maxRatio)
                 maxRatio = ra;
         }
-
-        for (int i = 0 ; i < len ; i ++){
+        Collections.shuffle(statusList);
+        for (int i = 0 ; i < len && size > 0; i ++){
             float prop = 0.5f;
+
             float delta = maxRatio - statusList.get(i).getRatio();
             prop = delta > 0.5f ? 1.0f : delta + prop;
             float temp = (float)Math.random();
-            if (temp <= prop){
-                result.add( i );
+            if (temp <= prop || (len - i <= size)){
+                result.add( statusList.get(i).getId() );
+                size --;
             }
         }
         return result;
     }
 
     public void postTest(){
+        Intent intent=new Intent(getApplicationContext(),ResultActivity.class);
+        Bundle b = new Bundle();
+        b.putInt("wrongCount", wrongCount);
+        b.putInt("rightCount" , rightCount);
+        b.putIntegerArrayList("test" , test);
+        intent.putExtras(b);
 
+        startActivity(intent);
+        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+        finish();
     }
 
     @Override
