@@ -3,12 +3,14 @@ package com.ganlu.tomoko;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -30,6 +32,7 @@ public class HomeActivity extends Activity {
         final Button btnMixed = (Button) findViewById(R.id.button_mix);
         final Button btnStatus = (Button) findViewById(R.id.button_status);
         initDB();
+        initFont();
         btnHiragana.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,6 +86,18 @@ public class HomeActivity extends Activity {
 
     }
 
+    private void initFont()
+    {
+        Typeface typeFace = Typeface.createFromAsset(getAssets(), "fonts/xy.ttf");
+        Button btn = (Button)findViewById(R.id.button_hiragana);
+        btn.setTypeface(typeFace);
+        btn = (Button)findViewById(R.id.button_katakana);
+        btn.setTypeface(typeFace);
+        btn = (Button)findViewById(R.id.button_mix);
+        btn.setTypeface(typeFace);
+        btn = (Button)findViewById(R.id.button_status);
+        btn.setTypeface(typeFace);
+    }
 
     private void initDB()
     {

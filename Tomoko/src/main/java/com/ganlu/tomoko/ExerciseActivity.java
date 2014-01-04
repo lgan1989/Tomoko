@@ -3,6 +3,8 @@ package com.ganlu.tomoko;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -70,6 +72,7 @@ public class ExerciseActivity extends Activity {
         test = generateTest(testSize);
 
         //    final TextView text = (TextView)findViewById(R.id.textDisplay);
+        final Typeface typeFace = Typeface.createFromAsset(getAssets(), "fonts/xy.ttf");
         final TextSwitcher text =  (TextSwitcher)findViewById(R.id.textSwitcher);
         text.setFactory(new ViewSwitcher.ViewFactory() {
 
@@ -77,7 +80,10 @@ public class ExerciseActivity extends Activity {
                 // TODO Auto-generated method stub
                 // create new textView and set the properties like clolr, size etc
                 TextView myText = new TextView(ExerciseActivity.this);
-                myText.setTextSize(200.0f);
+                myText.setTypeface(typeFace);
+                myText.setTextSize(220.0f);
+                myText.setTextColor(Color.parseColor("#3d3d3d"));
+
                 myText.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL);
 
                 return myText;
